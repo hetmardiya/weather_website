@@ -24,6 +24,7 @@ app.use('/bootstrap_js', express.static(path.join(__dirname, '../node_modules/bo
 app.use('/jquery', express.static(path.join(__dirname, '../node_modules/jquery/dist'), { 'extensions': ['js'] }));
 
 app.get("/", (req,res) =>{
+    
     res.render("index")
 })
  
