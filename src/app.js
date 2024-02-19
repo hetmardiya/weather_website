@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const connection = require("./database/connection");
+const new_data = require("./models/schema")
 const hbs = require("hbs");
 const port = process.env.PORT || 5000
 
@@ -23,11 +24,34 @@ app.use('/bootstrap_css', express.static(path.join(__dirname, '../node_modules/b
 app.use('/bootstrap_js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js'), { 'extensions': ['js'] }));
 app.use('/jquery', express.static(path.join(__dirname, '../node_modules/jquery/dist'), { 'extensions': ['js'] }));
 
-app.get("/", (req,res) =>{
-    
+app.use(express.urlencoded({extended:false}))
+
+app.get("/welcome", (req,res) =>{
     res.render("index")
 })
- 
+app.get("/details", (req,res) =>{
+    res.render("details")
+})
+app.get("/sign_in", (req,res) =>{
+    res.render("sign_in")
+})
+app.get("/registration", (req,res) =>{
+    res.render("registration")
+})
+app.post("/registration" , async (req,res) =>{
+    try {
+        // res.send(req.body);
+        const user_data = new new_data(req.body)
+        await user_data.save();
+        res.status(200).render("index")
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+app.get("/weather", (req,res) =>{
+    res.render("weather")
+})
+
 app.listen(port,()=>{
     console.log(`listing to port no ${port} from app.js file`);
 })

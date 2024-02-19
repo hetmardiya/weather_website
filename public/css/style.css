@@ -1,3 +1,334 @@
-h1{
-    color: red;
+*{
+    margin: 0%;
+    padding: 0%;
+}
+/* welcome.html page styling */
+.box_welcome{
+    border: 6px double rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    padding: 5px;
+}
+.box_welcome:hover{
+  animation: rotateBorder 2s linear infinite;
+}
+@keyframes rotateBorder {
+  0% {
+    border-color: #ff0000;
+  }
+  25% {
+    border-color: #00ff00;
+  }
+  50% {
+    border-color: #0000ff;
+  }
+  75% {
+    border-color: #ffff00;
+  }
+  100% {
+    border-color: #ff00ff;
+  }
+}
+.bsdk{
+  animation: jk 2s linear infinite;
+}
+
+@keyframes jk{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.img_welcome {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-86%,-47%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+  }
+  /* .img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  } */
+  .content_welcome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* weather.html page styling */
+  .main_box_weather{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .input_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid rgb(5, 75, 239);
+    padding: 5rem;
+    border-radius: 25px;
+    inset: 35px;
+    background-color: rgba(27, 112, 191, 0.266);
+    width: 50%;
+    height: 50vh;
+    z-index: 100;
+  }
+
+  .city_name{
+    width: 25rem;
+    height: 7vh;
+    outline: none;
+    border: 3px dashed blue;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.827);
+    color: rgb(24, 175, 221);
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    transition: 1s;
+  }
+.city_name:focus{
+  animation: rotateBorder 2s linear infinite;
+}
+
+  .okay{
+    margin-top: 4.5rem;
+  }
+
+  .okay .btn{
+    width: 10rem;
+    font-weight: bolder;
+    font-size: larger;
+    border-radius: 10px;
+    background-color: rgba(77, 100, 164, 0.556);
+    color: white;
+    transition: 1.2s;
+  }
+
+  .weather_image{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+  }
+
+.weather_button:hover{
+  border: 3px double rgb(102, 102, 184);
+  background-color: navy;
+  color: white;
+  box-shadow: 0 0 5px 3px darkblue;
+}
+
+/* sign_in.html page styling */
+.tt {
+  height: 100vh;
+  background: linear-gradient(45deg, #ff00ff, #fa8072, #db7093,#98fb98);
+  background-size: 600% 600%;
+  animation: gradientAnimation 5s infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.main_box_login{
+  top: 50%;
+  left: 50%;
+  transform: translate(70% , 50%);
+  width: 40%;
+  height: 50vh;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.main_box_login .login_img .abc{
+  width: 100%;
+  height: 45vh;
+  margin-left: -4rem;
+}
+
+.main_box_login .login_data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login_input_data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+input{
+  margin: 1rem 0rem 0.5rem 0rem;
+  width: 150%;
+  height: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  outline: none;
+  background-color: #db709421;
+}
+
+.registration::after{
+  transform: rotateY(120deg);
+}
+
+.login_input_data button{
+  width: 5rem;
+  height: 2rem;
+  margin: 1.5rem 0.5rem 0rem 0.5rem;
+  border-radius: 10px;
+  font-size: 90%;
+  outline: none;
+  border: none;
+}
+.login_input_data button:hover{
+  background-color: #db7093;
+  transition: 1s;
+}
+
+/* details.html page styling */
+
+.all_box{
+  width: 100%;
+  /* height: 100vh; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.sam{
+  background-color: rgb(37, 155, 240);
+  width: 15%;
+  height: 40vh;
+  border-radius: 10px;
+}
+
+.sam:hover{
+  box-shadow: 0px 0px 5px 3px blue ;
+  transition: 1s;
+}
+
+.data{
+  text-align: left;
+  margin: 2rem 1.4rem;
+}
+
+.data .deg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.data .emoji{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.containerr{
+  position: relative;
+}
+.ii{
+  height: 100vh;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* registration.html page styling */
+.main_box_registration{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registration_data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.row{
+  border: 2px solid rgb(31, 122, 226);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.reg_input_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reg_ani{
+  background-image: linear-gradient(45deg, #483d8b, #4169e1, #6495ed);
+  background-size: 600% 600%;
+  animation: gradient 5s infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+
+  50% {
+      background-position: 100% 50%;
+  }
+
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.reg_input_data button{
+  width: 5rem;
+  height: 2rem;
+  margin: 1.5rem 0.5rem 0rem 0.5rem;
+  border-radius: 10px;
+  font-size: 90%;
+  outline: none;
+  border: none;
+}
+.reg_input_data button:hover{
+  background-color: #0e8bdf;
+  transition: 1s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

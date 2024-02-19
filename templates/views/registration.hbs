@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>head}}
+    {{>navbar}}
+<body class="reg_ani">
+    <div class="main_box_registration">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <img src="imgs/registration.jpg" width="100%" height="300vh" alt="">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="registration_data">
+                    <form action="/registration" method="post" class="reg_input_data">
+                        <label for="fname">fname</label>
+                        <input type="text" name="fname" class="mt-2 mb-2" placeholder="first name">
+                        <label for="lname">last_name</label>
+                        <input type="text" name="lname" class="mt-2 mb-2" placeholder="last name">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" class="mt-2 mb-2" placeholder="E-mail">
+                        <label for="password">Password</label>
+                        <input type="password" name="pwd" class="mt-2 mb-2" placeholder="Password">
+                        <label for="phone">phone number</label>
+                        <input type="text" name="phone" maxlength="10" class="mt-2 mb-2" placeholder="phone number">
+                        <button type="submit">registration</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>footer_links}}
+</body>
