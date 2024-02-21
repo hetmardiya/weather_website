@@ -1,6 +1,7 @@
 const { type } = require("jquery");
 const mongoose = require("mongoose");
 const validator = require("validator")
+const bcriptjs = require("bcryptjs")
 
 const registration_data = mongoose.Schema({
     fname : {
@@ -29,6 +30,11 @@ const registration_data = mongoose.Schema({
         required : true
     }
 })
-
+registration_data.pre("save" , async function(next){
+    if (this.isModified("pwd")) {
+        this.pwd = await bcriptjs.hash(this.pwd,10);
+    }
+    next();
+})
 const new_data = mongoose.model("users",registration_data);
 module.exports = new_data;

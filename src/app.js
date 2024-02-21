@@ -6,6 +6,8 @@ const connection = require("./database/connection");
 const new_data = require("./models/schema")
 const hbs = require("hbs");
 const port = process.env.PORT || 5000
+const mongoose = require("mongoose")
+const bcriptjs = require("bcryptjs")
 
 // static file of css file in public folder
 const css_img_file_path = path.join(__dirname , "../public")
@@ -35,9 +37,24 @@ app.get("/details", (req,res) =>{
 app.get("/sign_in", (req,res) =>{
     res.render("sign_in")
 })
+app.post("/sign_in" , async (req,res)=>{
+    try {
+        const signin_email = req.body.login_email;
+        const signin_pwd = req.body.login_pwd;
+        const user_email=await new_data.findOne({email:signin_email})
+        const hash_pwd = await bcriptjs.compare(signin_pwd,user_email.pwd)
+        if (hash_pwd) {
+            res.render("index")
+        } else {
+            res.send("password is not matching")
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
 app.get("/registration", (req,res) =>{
     res.render("registration")
-})
+}) 
 app.post("/registration" , async (req,res) =>{
     try {
         // res.send(req.body);
