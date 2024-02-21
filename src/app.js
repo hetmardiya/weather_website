@@ -1,4 +1,5 @@
 // require npm
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -8,6 +9,7 @@ const hbs = require("hbs");
 const port = process.env.PORT || 5000
 const mongoose = require("mongoose")
 const bcriptjs = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 // static file of css file in public folder
 const css_img_file_path = path.join(__dirname , "../public")
@@ -43,6 +45,11 @@ app.post("/sign_in" , async (req,res)=>{
         const signin_pwd = req.body.login_pwd;
         const user_email=await new_data.findOne({email:signin_email})
         const hash_pwd = await bcriptjs.compare(signin_pwd,user_email.pwd)
+        const token = await user_email.generate_token();
+        res.cookie("website" , token , {
+            expires : new Date(Date.now() + 5 * 60 *60 *1000),
+            httpOnly:true
+        })
         if (hash_pwd) {
             res.render("index")
         } else {
@@ -59,6 +66,7 @@ app.post("/registration" , async (req,res) =>{
     try {
         // res.send(req.body);
         const user_data = new new_data(req.body)
+        const token = await user_data.generate_token();
         await user_data.save();
         res.status(200).render("index")
     } catch (error) {

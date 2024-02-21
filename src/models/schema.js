@@ -1,7 +1,8 @@
 const { type } = require("jquery");
 const mongoose = require("mongoose");
-const validator = require("validator")
-const bcriptjs = require("bcryptjs")
+const validator = require("validator");
+const bcriptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 const registration_data = mongoose.Schema({
     fname : {
@@ -28,8 +29,25 @@ const registration_data = mongoose.Schema({
     phone : {
         type : Number,
         required : true
-    }
+    },
+    tokens : [{
+        token : {
+            type : String,
+            required : true
+        }
+    }]
 })
+registration_data.methods.generate_token = async function(){
+    try {
+        const token = jwt.sign({_id : this._id.toString()},process.env.secret_key)
+        this.tokens = this.tokens.concat({token:token})
+        await this.save();
+        return token
+    } catch (error) {
+        console.log("error from the json web token part");
+    }
+}
+
 registration_data.pre("save" , async function(next){
     if (this.isModified("pwd")) {
         this.pwd = await bcriptjs.hash(this.pwd,10);
