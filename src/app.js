@@ -10,6 +10,8 @@ const port = process.env.PORT || 5000
 const mongoose = require("mongoose")
 const bcriptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const cookie_parser = require("cookie-parser")
+const auth = require("./middleware/auth")
 
 // static file of css file in public folder
 const css_img_file_path = path.join(__dirname , "../public")
@@ -29,11 +31,15 @@ app.use('/bootstrap_js', express.static(path.join(__dirname, '../node_modules/bo
 app.use('/jquery', express.static(path.join(__dirname, '../node_modules/jquery/dist'), { 'extensions': ['js'] }));
 
 app.use(express.urlencoded({extended:false}))
+app.use(cookie_parser())
 
 app.get("/welcome", (req,res) =>{
     res.render("index")
 })
-app.get("/details", (req,res) =>{
+app.get("/weather", auth ,(req,res) =>{
+    res.render("weather")
+})
+app.get("/details", auth ,(req,res) =>{
     res.render("details")
 })
 app.get("/sign_in", (req,res) =>{
@@ -77,8 +83,29 @@ app.post("/registration" , async (req,res) =>{
         res.status(500).send(error)
     }
 })
-app.get("/weather", (req,res) =>{
-    res.render("weather")
+
+app.get("/logout" , auth ,async (req,res)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((current_token)=>{
+            return current_token.token != req.token
+        })
+        res.clearCookie("website")
+        await req.user.save();
+        res.render("registration")
+    } catch (error) {
+        res.status(401).send(error)
+    }
+})
+
+app.get("/logout_all" , auth , async (req,res)=>{
+    try {
+        req.user.tokens = [];
+        res.clearCookie("website")
+        await req.user.save();
+        res.render("index")
+    } catch (error) {
+        res.status(401).send(error)
+    }
 })
 
 app.listen(port,()=>{
