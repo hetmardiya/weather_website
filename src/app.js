@@ -67,6 +67,10 @@ app.post("/registration" , async (req,res) =>{
         // res.send(req.body);
         const user_data = new new_data(req.body)
         const token = await user_data.generate_token();
+        res.cookie("website" , token , {
+            expires : new Date(Date.now() + 5 * 60 *60 *1000),
+            httpOnly:true
+        })
         await user_data.save();
         res.status(200).render("index")
     } catch (error) {
